@@ -1,5 +1,5 @@
 <?php
-function getLinks($url) {
+function getLinks($url, $dir) {
 
     $html = file_get_contents($url);
     $dom = new DOMDocument;
@@ -7,12 +7,14 @@ function getLinks($url) {
     foreach ($dom->getElementsByTagName('a') as $node) {
         if (strpos($node->getAttribute("href"), ".pat") !== false || strpos($node->getAttribute("href"), ".zip") !== false) {
 
-            echo "FILE: " . $node->getAttribute("href")."\n" ; 
+            //echo "FILE: " . $node->getAttribute("href")."\n" ; 
 
             $remote = parse_url($node->getAttribute("href"));
             $fullpath = explode("/", $remote["path"]);
             $filename = urldecode(array_pop($fullpath));
-            $path = "download/Os/DSM/";
+            $path = "download/Os/DSM/$dir/";
+
+            //echo "mkdir: " . "$path \n";
 
             @mkdir($path, 0777, true);
             $dest = "$path$filename";
@@ -36,12 +38,15 @@ function getLinks($url) {
             }
 
             if ($status == 200 && $contentLength <> "unknown" && file_exists($dest) && (filesize($dest) != $contentLength)) {
-                echo "remote file is $contentLength however local file is " . filesize($dest) . ", redownloading\n";
+                echo "Remote file is $contentLength however local file is " . filesize($dest) . ", Redownloading\n";
                 @unlink($dest);
             }
 
             if (!file_exists($dest)) {
-                echo "downloading " . $node->getAttribute("href") . " to $dest \n";
+                //echo "downloading " . $node->getAttribute("href") . " to $dest \n";
+                echo "Downloading: " . "$dest \n";
+                // echo "From: " . $node->getAttribute("href") . "\n\n";
+
                 $fh = fopen($dest, "w");
                 $ch = curl_init();
                 curl_setopt($ch, CURLOPT_USERAGENT,"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/113.0 ");             
@@ -49,8 +54,9 @@ function getLinks($url) {
                 curl_setopt($ch, CURLOPT_FILE, $fh);
                 curl_exec($ch);
                 curl_close($ch); 
-            } else {
-                echo "skipping download\n";
+//            } else {
+//                // echo "Skipping download\n";
+//                echo "Skipping: " . "$dest \n";
             }
         } else
         if (strpos($node->getAttribute("href"), "/download/Os/DSM/") !== false) {
@@ -60,4 +66,4 @@ function getLinks($url) {
         }
     }
 }
-getLinks("https://archive.synology.com/download/Os/DSM");
+getLinks("https://archive.synology.com/download/Os/DSM" , "");
