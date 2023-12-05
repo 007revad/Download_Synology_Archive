@@ -1,2 +1,2 @@
-# download-synology-dsm
-Download all the synology DSM firmware images
+# Download Synology Archive
+Download all or part of the Synology archive
