@@ -30,11 +30,18 @@ There is 1 variable you need to set so the script knows where you want it to dow
 
     $destination = "/volume1/downloads/archive.synology.com";
 
+**Credit**
+
+syno_archive_clone.php is based on the excellent work here: https://github.com/stopforumspam/download-synology-dsm <br>
+Give them a star if you find this script useful or interesting.
+
 <br>
 
 ### Bash launcher script
 
-To make it easier to run there is also syno_archive_clone.sh which provides menus to select the available `<srcdir>` and `<subdir>` options.
+To make it easier to run syno_archive_clone.php there is also syno_archive_clone.sh which provides menus to select the available `<srcdir>` and `<subdir>` options. It then runs the php script with those options as arguments.
+
+To run syno_archive_clone.sh
 
 `./syno_archive_clone.sh`
 
@@ -50,3 +57,23 @@ php_log can be blank `php_log=""` if you don't want anything logged. Or you can 
     #php_log="/volume1/downloads/archive.synology.com/clone_$(date '+%Y%m%d-%H%M').log"
 
 <br>
+
+**Bash launcher script screenshots**
+
+<p align="leftr"><img src="images/os.png"></p>
+
+<p align="leftr"><img src="images/os-all.png"></p>
+
+<p align="leftr"><img src="images/mobile.png"></p>
+
+<p align="leftr"><img src="images/chromeapp.png"></p>
+
+<p align="leftr"><img src="images/chromeapp.png"></p>
+
+<p align="leftr"><img src="images/firmware.png"></p>
+
+<p align="leftr"><img src="images/package-p1.png"></p>
+
+<p align="leftr"><img src="images/package-p2.png"></p>
+
+<p align="leftr"><img src="images/toolchain.png"></p>
