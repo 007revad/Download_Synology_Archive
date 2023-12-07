@@ -32,15 +32,15 @@ if ($argc != "3") {
     echo $args . "\n\n";
 
     echo "Usage: " . "\n";
-    echo "dsm_archive_clone.php <srcdir> <subdir>" . "\n\n";
+    echo "syno_archive_clone.php <srcdir> <subdir>" . "\n\n";
     echo "<subdir> can be All to download all in the srcdir>" . "\n\n";
     echo "Examples: " . "\n";
-    echo "    php ./dsm_archive_clone.php Os DSM" . "\n";
-    echo "    php ./dsm_archive_clone.php Os All" . "\n";
-    echo "    php ./dsm_archive_clone.php Package Docker" . "\n";
-    echo "    php ./dsm_archive_clone.php Package All" . "\n";
-    echo "    php ./dsm_archive_clone.php ToolChain toolkit" . "\n";
-    echo "    php ./dsm_archive_clone.php ToolChain \"Synology NAS GPL Source\"" . "\n";
+    echo "    php ./syno_archive_clone.php Os DSM" . "\n";
+    echo "    php ./syno_archive_clone.php Os All" . "\n";
+    echo "    php ./syno_archive_clone.php Package Docker" . "\n";
+    echo "    php ./syno_archive_clone.php Package All" . "\n";
+    echo "    php ./syno_archive_clone.php ToolChain toolkit" . "\n";
+    echo "    php ./syno_archive_clone.php ToolChain \"Synology NAS GPL Source\"" . "\n";
     exit(1);
 } else {
     $srcdir = "$argv[1]";
