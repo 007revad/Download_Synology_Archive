@@ -1,5 +1,16 @@
 # Download Synology Archive
-Download all or part of the Synology archive
+
+<a href="https://github.com/007revad/Download_Synology_Archive/releases"><img src="https://img.shields.io/github/release/007revad/Download_Synology_Archive.svg"></a>
+<a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2F007revad%2FDownload_Synology_Archive&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=views&edge_flat=false"/></a>
+[![](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/007revad)
+[![committers.top badge](https://user-badge.committers.top/australia/007revad.svg)](https://user-badge.committers.top/australia/007revad)
+<!-- [![committers.top badge](https://user-badge.committers.top/australia_public/007revad.svg)](https://user-badge.committers.top/australia_public/007revad) -->
+<!-- [![committers.top badge](https://user-badge.committers.top/australia_private/007revad.svg)](https://user-badge.committers.top/australia_private/007revad) -->
+<!-- [![Github Releases](https://img.shields.io/github/downloads/007revad/download_synology_archive/total.svg)](https://github.com/007revad/Download_Synology_Archive/releases) -->
+
+### Description
+
+Easily download part or all of the Synology download archive
 
 ### Main php script
 
