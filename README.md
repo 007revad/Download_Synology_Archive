@@ -43,7 +43,7 @@ There is 1 variable you need to set so the script knows where you want it to dow
 
 **Credit**
 
-syno_archive_clone.php is based on the excellent work here: https://github.com/stopforumspam/download-synology-dsm <br>
+syno_archive_clone.php is based on the excellent work at [github.com/stopforumspam/download-synology-dsm](https://github.com/stopforumspam/download-synology-dsm) <br>
 Give them a star if you find this script useful or interesting.
 
 <br>
