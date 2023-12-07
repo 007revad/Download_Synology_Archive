@@ -50,11 +50,11 @@ Give them a star if you find this script useful or interesting.
 
 ### Bash launcher script
 
-To make it easier to run syno_archive_clone.php there is also syno_archive_clone.sh which provides menus to select the available `<srcdir>` and `<subdir>` options. It then runs the php script with those options as arguments.
+To make it easier to run syno_archive_clone.php there is also syno_archive_select.sh which provides menus to select the available `<srcdir>` and `<subdir>` options. It then runs the php script with those options as arguments.
 
-To run syno_archive_clone.sh
+To run syno_archive_select.sh
 
-`./syno_archive_clone.sh`
+`./syno_archive_select.sh`
 
 **Requirements**
 
