@@ -9,8 +9,8 @@
 # Script to select arguments for syno_archive_clone.php
 #------------------------------------------------------------------------------
 
-php_script="/volume1/homes/Dave/.scripts/syno_archive_clone.php"
-php_log="/volume1/NetBackup/archive.synology.com/clone_$(date '+%Y%m%d-%H%M').log"
+php_script="/volume1/scripts/syno_archive_clone.php"
+php_log="/volume1/downloads/archive.synology.com/clone_$(date '+%Y%m%d-%H%M').log"
 
 
 echo -e "Synology Archive Clone \n"
@@ -113,8 +113,11 @@ echo -e "You selected: $type \n"
 
 
 if [[ -n $srcdir ]] && [[ -n $type ]]; then
-    #echo -e "srcdir: $srcdir \ntype: $type"  # debug
-    php "$php_script" "$srcdir" "$type" 2>&1 | tee "$php_log"
+    if [[ -n $php_log ]]; then
+        php "$php_script" "$srcdir" "$type" 2>&1 | tee "$php_log"
+    else
+        php "$php_script" "$srcdir" "$type"
+    fi
 else
     echo "args empty!"  # debug
     exit 1              # debug
