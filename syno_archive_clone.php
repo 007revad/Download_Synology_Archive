@@ -10,7 +10,7 @@
 // php ./syno_archive_clone.php 2>&1 | tee ./clone_$(date '+%Y%m%d-%H%M').log
 //-----------------------------------------------------------------------------
 
-$destination = "/volume1/NetBackup/archive.synology.com";
+$destination = "/volume1/downloads/archive.synology.com";
 
 if ($argc != "3") {
     if ($argc < "2") {
