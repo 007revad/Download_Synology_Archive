@@ -1,0 +1,3 @@
+v1.0.3
+- Added arguments to download different types.
+- Added a bash launcher script to make selecting the arguments easy.
