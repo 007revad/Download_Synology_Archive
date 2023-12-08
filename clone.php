@@ -7,7 +7,7 @@
 // Checked at https://phpcodechecker.com/
 //
 // Run command
-// php ./syno_archive_clone.php 2>&1 | tee ./clone_$(date '+%Y%m%d-%H%M').log
+// php ./clone.php 2>&1 | tee ./clone_$(date '+%Y%m%d-%H%M').log
 //-----------------------------------------------------------------------------
 
 $destination = "/volume1/downloads/archive.synology.com";
@@ -59,8 +59,11 @@ if(@chdir($destination)===true) {
 echo "------------------------------------------------------------ \n";
 
 function getLinks($url, $srcdir, $type, $dir) {
-
     $html = file_get_contents($url);
+    if (empty($html)) {
+        echo "file_get_contents command timed out!" . "\n";
+        return;
+    }
     $dom = new DOMDocument;
     @$dom->loadHTML($html);
     foreach ($dom->getElementsByTagName('a') as $node) {
