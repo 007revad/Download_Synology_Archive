@@ -6,17 +6,17 @@
 #
 # Checked with https://shellcheck.net/
 #
-# Script to select arguments for syno_archive_clone.php
+# Script to select arguments for clone.php
 #--------------------------------------------------------------------
 
 # Set location of get_urls.php
-php_urls="/volume1/homes/Dave/.scripts/get_urls.php"
+php_urls="/volume1/scripts/get_urls.php"
 
-# Set location of syno_archive_clone.php
-php_script="/volume1/homes/Dave/.scripts/syno_archive_clone.php"
+# Set location of clone.php
+php_script="/volume1/scripts/clone.php"
 
-# Set location to save syno_archive_clone.php log
-php_log="/volume1/NetBackup/archive.synology.com/clone_$(date '+%Y%m%d-%H%M').log"
+# Set location to save clone.php log
+php_log="/volume1/downloads/archive.synology.com/clone_$(date '+%Y%m%d-%H%M').log"
 
 
 #--------------------------------------------------------------------
@@ -84,7 +84,7 @@ select subdir in "${typelist[@]}"; do
 done
 echo -e "You selected: $type \n"
 
-# Run syno_archive_clone.php
+# Run clone.php
 if [[ -n $srcdir ]] && [[ -n $type ]]; then
     if [[ -n $php_log ]]; then
         php "$php_script" "$srcdir" "$type" 2>&1 | tee "$php_log"
