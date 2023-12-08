@@ -90,4 +90,4 @@ php_log can be blank `php_log=""` if you don't want anything logged. Or you can 
 
 <p align="leftr"><img src="images/toolchain.png"></p>
 
-<p align="leftr"><img src="images/firmware.png"></p>
+<p align="leftr"><img src="images/firmware-1.png"></p>
