@@ -61,7 +61,9 @@ To run syno_archive_clone.sh
 There are 3 variables you need to set so the script knows where the 2 php scripts are and where to save the log:
 
     php_script="/volume1/scripts/get_urls.php"
+    
     php_script="/volume1/scripts/clone.php"
+    
     php_log="/volume1/downloads/archive.synology.com/clone_$(date '+%Y%m%d-%H%M').log"
 
 php_log can be blank `php_log=""` if you don't want anything logged. Or you can disable it by putting a # in front of it:
