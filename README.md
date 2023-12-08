@@ -54,7 +54,7 @@ To make it easier to run clone.php there is also syno_archive_clone.sh which pro
 
 To run syno_archive_clone.sh
 
-`./syno_archive_clone.sh`
+    ./syno_archive_clone.sh
 
 **Requirements**
 
