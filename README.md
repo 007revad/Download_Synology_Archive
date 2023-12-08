@@ -75,16 +75,16 @@ php_log can be blank `php_log=""` if you don't want anything logged. Or you can 
 
 <p align="leftr"><img src="images/os-all.png"></p>
 
-<p align="leftr"><img src="images/mobile.png"></p>
-
-<p align="leftr"><img src="images/chromeapp.png"></p>
-
-<p align="leftr"><img src="images/chromeapp.png"></p>
-
-<p align="leftr"><img src="images/firmware.png"></p>
-
 <p align="leftr"><img src="images/package-p1.png"></p>
 
 <p align="leftr"><img src="images/package-p2.png"></p>
 
+<p align="leftr"><img src="images/utility.png"></p>
+
+<p align="leftr"><img src="images/mobile.png"></p>
+
+<p align="leftr"><img src="images/chromeapp.png"></p>
+
 <p align="leftr"><img src="images/toolchain.png"></p>
+
+<p align="leftr"><img src="images/firmware.png"></p>
