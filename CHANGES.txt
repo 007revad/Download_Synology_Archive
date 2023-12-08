@@ -3,6 +3,7 @@ v1.0.4
 - Checks required files exist are are executable.
 - Checks log path exists.
 - Added timeout error handling for file_get_contents function.
+- Known issue: Currently not working for /download/Firmware/Camera
 
 v1.0.3
 - Added arguments to download different types.
