@@ -2,6 +2,7 @@ v1.0.4
 - Now gets list of download types and sub folders instead of using a hard-coded list.
 - Checks required files exist are are executable.
 - Checks log path exists.
+- Added timeout error handling for file_get_contents function.
 
 v1.0.3
 - Added arguments to download different types.
