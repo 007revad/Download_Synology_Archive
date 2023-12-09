@@ -1,18 +1,18 @@
 <?php
-//-----------------------------------------------------------------------------
-// Forked from https://github.com/stopforumspam/download-synology-dsm
-//-----------------------------------------------------------------------------
-// https://github.com/007revad/Download_Synology_Archive
-//
-// Checked at https://phpcodechecker.com/
-//
-// Run command
-// php ./clone.php 2>&1 | tee ./clone_$(date '+%Y%m%d-%H%M').log
-//-----------------------------------------------------------------------------
+#----------------------------------------------------------------------
+# Forked from https://github.com/stopforumspam/download-synology-dsm
+#----------------------------------------------------------------------
+# https://github.com/007revad/Download_Synology_Archive
+#
+# Checked at https://phpcodechecker.com/
+#
+# Run command
+# php ./clone.php Os DSM 2>&1 | tee ./clone_$(date '+%Y%m%d-%H%M').log
+#----------------------------------------------------------------------
 
 $destination = "/volume1/downloads/archive.synology.com";
 
-if ($argc != "3") {
+if (($argc != "3") || ($argv[1] == "Firmware")) {
     if ($argc < "2") {
         echo "Missing arguments!" . "\n";
     }
@@ -23,6 +23,10 @@ if ($argc != "3") {
         echo "Too many arguments!" . "\n";
     }
 
+    if ($argv[1] == "Firmware") {
+        echo "Firmware needs to include the firmware type in <scrdir>" . "\n";
+    }
+
     $i = 1;
     $args = "$argv[0]";
     while($i < $argc) {
@@ -31,16 +35,20 @@ if ($argc != "3") {
     }
     echo $args . "\n\n";
 
-    echo "Usage: " . "\n";
-    echo "syno_archive_clone.php <srcdir> <subdir>" . "\n\n";
-    echo "<subdir> can be All to download all in the srcdir>" . "\n\n";
-    echo "Examples: " . "\n";
-    echo "    php ./syno_archive_clone.php Os DSM" . "\n";
-    echo "    php ./syno_archive_clone.php Os All" . "\n";
-    echo "    php ./syno_archive_clone.php Package Docker" . "\n";
-    echo "    php ./syno_archive_clone.php Package All" . "\n";
-    echo "    php ./syno_archive_clone.php ToolChain toolkit" . "\n";
-    echo "    php ./syno_archive_clone.php ToolChain \"Synology NAS GPL Source\"" . "\n";
+    echo "Usage: clone.php <srcdir> <subdir>" . "\n";
+    echo "  Examples: " . "\n";
+    echo "    php ./clone.php Os DSM" . "\n";
+    echo "    php ./clone.php Package Docker" . "\n";
+    echo "    php ./clone.php ToolChain \"Synology NAS GPL Source\"" . "\n\n";
+    echo "To download all in the <srcdir> use All as the <subdir>" . "\n";
+    echo "  Examples: " . "\n";
+    echo "    php ./clone.php Os All" . "\n";
+    echo "    php ./clone.php Package All" . "\n\n";
+    echo "Firmware needs to include the firmware type in <scrdir>" . "\n";
+    echo "  Examples: " . "\n";
+    echo "    php ./clone.php Firmware/Camera BC500" . "\n";
+    echo "    php ./clone.php Firmware/Camera TC500" . "\n";
+    echo "    php ./clone.php Firmware/Camera All" . "\n\n";
     exit(1);
 } else {
     $srcdir = "$argv[1]";
@@ -59,6 +67,9 @@ if(@chdir($destination)===true) {
 echo "------------------------------------------------------------ \n";
 
 function getLinks($url, $srcdir, $type, $dir) {
+
+    //echo "url: $url" . "\n";  # debug
+
     $html = file_get_contents($url);
     if (empty($html)) {
         echo "file_get_contents command timed out!" . "\n";
@@ -67,6 +78,7 @@ function getLinks($url, $srcdir, $type, $dir) {
     $dom = new DOMDocument;
     @$dom->loadHTML($html);
     foreach ($dom->getElementsByTagName('a') as $node) {
+
         if (strpos($node->getAttribute("href"), ".pat") !== false  // Os
             || strpos($node->getAttribute("href"), ".spk") !== false  // Package
             || strpos($node->getAttribute("href"), ".bz2") !== false  // Utility
@@ -101,7 +113,7 @@ function getLinks($url, $srcdir, $type, $dir) {
             @mkdir($path, 0777, true);
             $dest = "$path$filename";
 
-            // getting remote file size
+            # Getting remote file size
             $ch = curl_init($node->getAttribute("href"));
             curl_setopt($ch, CURLOPT_NOBODY, true);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -140,8 +152,7 @@ function getLinks($url, $srcdir, $type, $dir) {
 //                // echo "Skipping download\n";
 //                echo "Skipping: " . "$dest \n";
             }
-        } else
-        if (strpos($node->getAttribute("href"), "/download/$srcdir/$type/") !== false) {
+        } elseif (strpos($node->getAttribute("href"), "/download/$srcdir/$type/") !== false) {
             echo "DIR: " . $node->getAttribute("href")."\n";
             $url = "https://archive.synology.com" .$node->getAttribute("href");
             getLinks($url, $srcdir, $type, $node->nodeValue);
@@ -162,7 +173,7 @@ function getDirs($url, $srcdir, $type) {
         $fullpath = explode("/", $remote["path"]);
         $type = urldecode(array_pop($fullpath));
 
-        if ($type != "download") {
+        if (($type != "download") && (!str_contains($srcdir, $type))) {
             $types[] = $type;
             $path = "download/$srcdir/$type/";
         }
@@ -176,8 +187,10 @@ if ($type != "All") {
     echo "Checking: " . $srcdir . "/" . $type . "\n";
     getLinks("https://archive.synology.com/download/$srcdir/$type", "$srcdir", "$type", "");
 } else {
-    echo "Checking: " . $srcdir . " > " . "All" . "\n";
+    echo "Checking: " . $srcdir . " > " . $type . "\n";
     getDirs("https://archive.synology.com/download/$srcdir", $srcdir, "");
+
+    # Get array of types
     $type = "";
     $i = 0;
     while($i < count($types)) {
@@ -187,8 +200,8 @@ if ($type != "All") {
     }
 }
 
-echo "----------------------------------- \n";
+echo "------------------------------------------------------------ \n";
 echo "Started:  $start \n";
 echo "Finished: " . date('Y-m-d H:i:s') . "\n";
-echo "----------------------------------- \n";
+echo "------------------------------------------------------------ \n";
  
