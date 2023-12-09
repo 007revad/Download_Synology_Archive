@@ -17,23 +17,34 @@ Easily download part or all of the Synology download archive
 You can run syno_archive_clone.php directly. It needs 2 arguments.
 
 ```
-Usage:
-    clone.php <srcdir> <subdir>
-    <subdir> can be All to download all in the <srcdir>
-    Examples:
-      php ./clone.php Os DSM
-      php ./clone.php Os All
-      php ./clone.php Package Docker
-      php ./clone.php Package All
-      php ./clone.php ToolChain toolkit
-      php ./clone.php ToolChain "Synology NAS GPL Source"
+Usage: clone.php <srcdir> <subdir>
+  Examples:
+    php ./clone.php Os DSM
+    php ./clone.php Package Docker
+    php ./clone.php ToolChain "Synology NAS GPL Source"
+
+To download all in the <srcdir> use All as the <subdir>
+  Examples:
+    php ./clone.php Os All
+    php ./clone.php Package All
+
+Firmware needs to include the firmware type in <scrdir>
+  Examples:
+    php ./clone.php Firmware/Camera BC500
+    php ./clone.php Firmware/Camera TC500
+    php ./clone.php Firmware/Camera All
 ```
 
 **Logging the output**
 
 If you want to log the output with the date and time:
 
-    php ./clone.php 2>&1 | tee ./clone_$(date '+%Y%m%d-%H%M').log
+```
+php ./clone.php <srcdir> <subdir> 2>&1 | tee ./clone_$(date '+%Y%m%d-%H%M').log
+
+Example:
+php ./clone.php Os DSM 2>&1 | tee ./clone_$(date '+%Y%m%d-%H%M').log
+```
 
 **Requirements**
 
@@ -90,4 +101,4 @@ php_log can be blank `php_log=""` if you don't want anything logged. Or you can 
 
 <p align="leftr"><img src="images/toolchain.png"></p>
 
-<p align="leftr"><img src="images/firmware.png"></p>
+<p align="leftr"><img src="images/firmware-2.png"></p>
