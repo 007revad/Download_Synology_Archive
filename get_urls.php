@@ -12,7 +12,7 @@ if (isset($argv[1])) {
     $srcdir = "$argv[1]";
 }
 
-function getDirs($url, $srcdir, $type) {
+function getDirs($url, $srcdir) {
     $html = file_get_contents($url);
     $dom = new DOMDocument;
     @$dom->loadHTML($html);
@@ -22,17 +22,17 @@ function getDirs($url, $srcdir, $type) {
         $fullpath = explode("/", $remote["path"]);
         $type = urldecode(array_pop($fullpath));
 
-        if ($type != "download") {
-            echo "\"" . $type . "\" ";  // output to bash script
+        if (($type != "download") && (!str_contains($srcdir, $type))) {
+            echo "\"" . $type . "\" ";  # Output to bash script
             $path = "download/$srcdir/$type/";
         }
     }
 }
 
 if ( (isset($srcdir)) && (!empty($srcdir)) ) {
-    getDirs("https://archive.synology.com/download/$srcdir", "$srcdir", "");
+    getDirs("https://archive.synology.com/download/$srcdir", "$srcdir");
 } else {
-    getDirs("https://archive.synology.com/download", "", "");
+    getDirs("https://archive.synology.com/download", "");
 }
 echo "\n";
 
