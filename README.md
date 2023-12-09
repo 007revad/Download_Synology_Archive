@@ -44,7 +44,7 @@ Firmware needs to include the firmware type in <scrdir>
 
 If you want to log the output with the date and time:
 
-    php ./clone.php Os DSM 2>&1 | tee ./clone_$(date '+%Y%m%d-%H%M').log
+    php ./clone.php <srcdir> <subdir> 2>&1 | tee ./clone_$(date '+%Y%m%d-%H%M').log
 
 **Requirements**
 
