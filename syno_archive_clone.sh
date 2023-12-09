@@ -45,19 +45,19 @@ urls_to_array() {
     while [[ $num -lt $((qty +1)) ]]; do
         item=$(echo "$urls" | cut -d"\"" -f$num)
         #echo "$item"  # debug
-        typelist+=("$item")
+        if [[ $item != "$srcdir" ]]; then
+            typelist+=("$item")
+        fi
         num=$((num +2))
     done
 }
 
 array_qty() { 
     qty=$(echo "$urls" | grep -o '"' | wc -l)  # Qty of " in string
-    if [[ $1 != "NoAll" ]]; then
-        if [[ $qty -gt "2" ]]; then
-            typelist=( "All" )
-        else
-            typelist=()
-        fi
+    if [[ $1 != "NoAll" ]] && [[ $qty -gt "2" ]]; then
+        typelist=( "All" )
+    else
+        typelist=()
     fi
 }
 
@@ -69,20 +69,56 @@ urls_to_array
 # Choose source directory
 PS3="Choose download type: "
 select srcdir in "${typelist[@]}"; do
-    urls=$(php "$php_urls" "$srcdir")
-    array_qty
-    urls_to_array
-    break
+    case "$srcdir" in
+        "")
+            echo "Invalid Choice!"
+            ;;
+        *)
+            urls=$(php "$php_urls" "$srcdir")
+            array_qty
+            urls_to_array
+            break
+            ;;
+    esac
 done
 echo -e "You selected: $srcdir \n"
 
 # Choose sub directory
 PS3="Choose $srcdir type: "
 select subdir in "${typelist[@]}"; do
-    type="$subdir"
-    break
+    case "$subdir" in
+        "")
+            echo "Invalid Choice!"
+            ;;
+        *)
+            type="$subdir"
+            break
+            ;;
+    esac
 done
 echo -e "You selected: $type \n"
+
+
+# Choose Firmware sub directory
+if [[ $srcdir = "Firmware" ]]; then
+    srcdir="${srcdir}/$subdir"
+    urls=$(php "$php_urls" "$srcdir")
+    array_qty
+    urls_to_array
+    PS3="Choose $type type: "
+    select subdir in "${typelist[@]}"; do
+        case "$srcdir" in
+            "")
+                echo "Invalid Choice!"
+                ;;
+            *)
+                type="$subdir"
+                echo -e "You selected: $(basename -- "$srcdir") \n"
+                break
+                ;;
+        esac
+    done
+fi
 
 # Run clone.php
 if [[ -n $srcdir ]] && [[ -n $type ]]; then
@@ -92,8 +128,8 @@ if [[ -n $srcdir ]] && [[ -n $type ]]; then
         php "$php_script" "$srcdir" "$type"
     fi
 else
-    echo "args empty!"  # debug
-    exit 1              # debug
+    echo "args empty!"
+    exit 1
 fi
 
 exit
