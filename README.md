@@ -17,23 +17,18 @@ Easily download part or all of the Synology download archive
 You can run syno_archive_clone.php directly. It needs 2 arguments.
 
 ```
-Usage:
-clone.php <srcdir> <subdir>
-
+Usage: clone.php <srcdir> <subdir>
   Examples:
     php ./clone.php Os DSM
     php ./clone.php Package Docker
-    php ./clone.php ToolChain toolkit
     php ./clone.php ToolChain "Synology NAS GPL Source"
 
 To download all in the <srcdir> use All as the <subdir>
-
   Examples:
     php ./clone.php Os All
     php ./clone.php Package All
 
 Firmware needs to include the firmware type in <scrdir>
-
   Examples:
     php ./clone.php Firmware/Camera BC500
     php ./clone.php Firmware/Camera TC500
