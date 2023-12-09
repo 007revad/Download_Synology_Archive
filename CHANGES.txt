@@ -1,3 +1,6 @@
+v1.0.5
+- Now working for /download/Firmware/Camera
+
 v1.0.4
 - Now gets list of download types and sub folders instead of using a hard-coded list.
 - Checks required files exist are are executable.
