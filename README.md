@@ -99,6 +99,6 @@ php_log can be blank `php_log=""` if you don't want anything logged. Or you can 
 
 <p align="leftr"><img src="images/chromeapp.png"></p>
 
-<p align="leftr"><img src="images/toolchain.png"></p>
+<p align="leftr"><img src="images/source.png"></p>
 
 <p align="leftr"><img src="images/firmware-2.png"></p>
