@@ -14,16 +14,16 @@ Easily download part or all of the Synology download archive
 
 ### Main php script
 
-You can run syno_archive_clone.php directly. It needs 2 arguments.
+You can run syno_archive_clone.php directly. It needs 2 or 3 arguments.
 
 ```
-Usage: clone.php <srcdir> <subdir>
+Usage: clone.php <srcdir> <subdir> [arch]
   Examples:
     php ./clone.php Os DSM
     php ./clone.php Package Docker
-    php ./clone.php ToolChain "Synology NAS GPL Source"
+    php ./clone.php ToolChain toolkit
 
-To download all in the <srcdir> use All as the <subdir>
+To download all in the <srcdir> use All as the <subdir>. ToolChain does NOT support the All argument
   Examples:
     php ./clone.php Os All
     php ./clone.php Package All
@@ -33,6 +33,11 @@ Firmware needs to include the firmware type in <scrdir>
     php ./clone.php Firmware/Camera BC500
     php ./clone.php Firmware/Camera TC500
     php ./clone.php Firmware/Camera All
+
+"Synology NAS GPL Source" needs to be included in <scrdir> and CPU arch needs to be included as [arch]
+  Examples:
+    php ./clone.php ToolChain "Synology NAS GPL Source" v1000
+    php ./clone.php ToolChain "Synology NAS GPL Source" geminilake
 ```
 
 **Logging the output**
